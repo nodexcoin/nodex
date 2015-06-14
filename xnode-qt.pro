@@ -14,20 +14,6 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 }
 
 
-BOOST_LIB_SUFFIX=-mgw49-mt-s-1_57
-BOOST_INCLUDE_PATH=C:/deps/boost_1_57_0
-BOOST_LIB_PATH=C:/deps/boost_1_57_0/stage/lib
-BDB_INCLUDE_PATH=C:/deps/db-4.8.30.NC/build_unix
-BDB_LIB_PATH=C:/deps/db-4.8.30.NC/build_unix
-OPENSSL_INCLUDE_PATH=C:/deps/openssl-1.0.1l/include
-OPENSSL_LIB_PATH=C:/deps/openssl-1.0.1l
-MINIUPNPC_INCLUDE_PATH=C:/deps/
-MINIUPNPC_LIB_PATH=C:/deps/miniupnpc
-QRENCODE_INCLUDE_PATH=C:/deps/qrencode-3.4.4
-QRENCODE_LIB_PATH=C:/deps/qrencode-3.4.4/.libs
-SECP256K1_LIB_PATH=C:/sling2/secp256k1/.libs
-SECP256K1_INCLUDE_PATH=C:/sling2/secp256k1/include
-
 # for boost 1.37, add -mt to the boost libraries
 # use: qmake BOOST_LIB_SUFFIX=-mt
 # for boost thread win32 with _win32 sufix
@@ -119,7 +105,7 @@ SOURCES += src/txdb-leveldb.cpp
         QMAKE_RANLIB = $$replace(QMAKE_STRIP, strip, ranlib)
     }
     LIBS += -lshlwapi
-    #genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libleveldb.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libmemenv.a
+    genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libleveldb.a && $$QMAKE_RANLIB $$PWD/src/leveldb/libmemenv.a
 }
 genleveldb.target = $$PWD/src/leveldb/libleveldb.a
 genleveldb.depends = FORCE
@@ -159,7 +145,7 @@ contains(USE_O3, 1) {
 QMAKE_CXXFLAGS_WARN_ON = -fdiagnostics-show-option -Wall -Wextra -Wno-ignored-qualifiers -Wformat -Wformat-security -Wno-unused-parameter -Wstack-protector
 
 # Input
-DEPENDPATH += src src/json src/qt src/ftp
+DEPENDPATH += src src/json src/qt
 HEADERS += src/qt/bitcoingui.h \
     src/qt/transactiontablemodel.h \
     src/qt/addresstablemodel.h \
@@ -280,17 +266,7 @@ HEADERS += src/qt/bitcoingui.h \
     src/qt/sendmessagesdialog.h \
     src/qt/sendmessagesentry.h \
     src/qt/plugins/mrichtexteditor/mrichtextedit.h \
-    src/qt/qvalidatedtextedit.h \
-	src/ftp/mainwindow.h \
-    src/ftp/ftpserver.h \
-    src/ftp/ftpcontrolconnection.h \
-    src/ftp/sslserver.h \
-    src/ftp/ftpstorcommand.h \
-    src/ftp/ftpretrcommand.h \
-    src/ftp/ftplistcommand.h \
-    src/ftp/ftpcommand.h \
-    src/ftp/debuglogdialog.h \
-    src/ftp/dataconnection.h
+    src/qt/qvalidatedtextedit.h 
 
 SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactiontablemodel.cpp \
@@ -402,21 +378,11 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/sendmessagesentry.cpp \
     src/qt/qvalidatedtextedit.cpp \
     src/qt/plugins/mrichtexteditor/mrichtextedit.cpp \
-    src/rpcsmessage.cpp \
-	src/ftp/mainwindow.cpp \
-    src/ftp/ftpserver.cpp \
-    src/ftp/ftpcontrolconnection.cpp \
-    src/ftp/sslserver.cpp \
-    src/ftp/ftpstorcommand.cpp \
-    src/ftp/ftpretrcommand.cpp \
-    src/ftp/ftplistcommand.cpp \
-    src/ftp/ftpcommand.cpp \
-    src/ftp/debuglogdialog.cpp \
-    src/ftp/dataconnection.cpp
+    src/rpcsmessage.cpp 
 
 RESOURCES += \
-    src/qt/bitcoin.qrc \
-    src/ftp/res.qrc
+    src/qt/bitcoin.qrc 
+
 FORMS += \
     src/qt/forms/coincontroldialog.ui \
     src/qt/forms/sendcoinsdialog.ui \
@@ -438,9 +404,7 @@ FORMS += \
     src/qt/forms/messagepage.ui \
     src/qt/forms/sendmessagesentry.ui \
     src/qt/forms/sendmessagesdialog.ui \
-    src/qt/plugins/mrichtexteditor/mrichtextedit.ui \
-    src/ftp/mainwindow.ui \
-    src/ftp/debuglogdialog.ui
+    src/qt/plugins/mrichtexteditor/mrichtextedit.ui 
 
 contains(DEFINES, USE_NATIVE_I2P) {
 HEADERS += src/i2p.h \
